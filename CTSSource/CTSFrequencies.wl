@@ -14,16 +14,14 @@ Begin["`Private`"];
 
 Needs["CTSConstants`"];
 
-Wce[PlasmaParams_Association]                 := ElementaryCharge * PlasmaParams["B"] / (ElectronMass * SpeedOfLightC); (*rad/sec*)
-Wci[PlasmaParams_Association, Ion_Association]:= ElementaryCharge * PlasmaParams["B"] / ( Ion["Mass"] * SpeedOfLightC); (*rad/sec*)
+Wce[PlasmaParams_Association]                 := Evaluate[ElementaryCharge          PlasmaParams["B"] / (ElectronMass * SpeedOfLightC)]; (*rad/sec*)
+Wci[PlasmaParams_Association, Ion_Association]:= Evaluate[ElementaryCharge Ion["Z"] PlasmaParams["B"] / ( Ion["Mass"] * SpeedOfLightC)]; (*rad/sec*)
 
-Wpe[PlasmaParams_Association]:= Sqrt[4 Pi PlasmaParams["n0"]                          ElementaryCharge^2 / ElectronMass];(*rad/sec*)
+
+Wpe[PlasmaParams_Association]                 := Evaluate[Sqrt[4 Pi PlasmaParams["n0"] ElementaryCharge^2 / ElectronMass]]; (*rad/sec*)
 Wpi[PlasmaParams_Association, Ion_Association]:=
-							    Sqrt[4 Pi PlasmaParams["n0"] Ion["ni/ne"] Ion["Z"]^2 ElementaryCharge^2 /  Ion["Mass"]];(*rad/sec*)
+                         Evaluate[Sqrt[4 Pi PlasmaParams["n0"] Ion["ni/ne"] Ion["Z"]^2 ElementaryCharge^2 /  Ion["Mass"]]]; (*rad/sec*)
 
 End[];
 
 EndPackage[];
-
-
-
