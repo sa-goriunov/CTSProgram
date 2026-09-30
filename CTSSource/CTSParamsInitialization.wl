@@ -33,7 +33,7 @@ IonRestEnergy = IonParams["A"] * AtomicMassUnit * SpeedOfLightC^2;
 	
 	"Wpi" -> N[Sqrt[4 Pi ni ElementaryCharge^2 / (IonParams["A"] AtomicMassUnit)]], (*rad/sec, ion plasma frequency*)
 	
-	     "Vti" -> Vti,                    (*cm/sec, ion thermal velocity*)
+	     "Vti" -> Vti,                   (*cm/sec, ion thermal velocity*)
 	"LarmorRi" -> N[Sqrt[2] * Vti / Wci] (*cm, ion Larmor radius*)
 |>
 ]
@@ -56,7 +56,7 @@ Vte = SpeedOfLightC * Sqrt[BoltzmannK * PlasmaParams["Te"] / ElectronRestEnergy]
 	 "B" -> PlasmaParams["B"] * 10^( 4), (*G*)
 
   
-	"Wce" -> Wce,                                                                 (*rad/sec, electron gyrofrequency*)
+	"Wce" -> Wce,                                                   (*rad/sec, electron gyrofrequency*)
 	"Wpe" -> N[Sqrt[4 Pi ne ElementaryCharge^2 / ElectronMass]], (*rad/sec, electrom plasma frequency*)
  
  
