@@ -4,5 +4,6 @@
 (* Licensed under Apache 2.0 *)
 
 Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSConstants.wl"}]];
+Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSIons.wl"}]];
 Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSParamsInitialization.wl"}]];
 Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSWaveVectors.wl"}]];

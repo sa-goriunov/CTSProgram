@@ -17,31 +17,34 @@ Needs["CTS`Constants`"];
 
 
 (*IonInitialization[PlasmaParams_Association, IonParams_Association] initializes the parametrs of the ion.*)
-IonInitialization[PlasmaParams_Association, IonParams_Association] := Module[{Wci, Vti, IonRestEnergy, ni},
+IonInitialization[PlasmaParams_Association, IonParams_Association] := Module[{Wci, Vti, IonRestEnergy, B, ni},
 
-          Wci = IonParams["Z"] ElementaryCharge PlasmaParams["B"] / (IonParams["A"] * AtomicMassUnit * SpeedOfLightC);
-IonRestEnergy = IonParams["A"] * AtomicMassUnit * SpeedOfLightC^2;
+            B = PlasmaParams["B"]  * 10^( 4); (*G*)
+          Wci = IonParams["IonType", "Z"] ElementaryCharge PlasmaParams["B"] / (IonParams["IonType", "A"] * AtomicMassUnit * SpeedOfLightC);
+IonRestEnergy = IonParams["IonType", "A"] * AtomicMassUnit * SpeedOfLightC^2;
           Vti = SpeedOfLightC * Sqrt[BoltzmannK * PlasmaParams["Ti"] / IonRestEnergy];
            ni = PlasmaParams["ne"] * IonParams["ni/ne"] * 10^(-6); (*cm^(-3)*)
 
 <|
-	         "Z" -> IonParams["Z"],                  (*Nuclear charge number of the ion*)
-	         "m" -> IonParams["A"] * AtomicMassUnit, (*g, mass of the ion*)
-	"RestEnergy" -> IonRestEnergy,                   (*erg*)
-	     "ni/ne" -> IonParams["ni/ne"],              (*the ratio of the concentrations*)
-	       "Wci" -> Wci,                             (*rad/sec, ion gyrofrequency*)
+	         "Z" -> IonParams["IonType", "Z"],                  (*Nuclear charge number of the ion*)
+	         "m" -> IonParams["IonType", "A"] * AtomicMassUnit, (*g, mass of the ion*)
+	"RestEnergy" -> IonRestEnergy,                              (*erg*)
+	     "ni/ne" -> IonParams["ni/ne"],                         (*the ratio of the concentrations*)
+	       "Wci" -> Wci,                                        (*rad/sec, ion gyrofrequency*)
 	
-	"Wpi" -> N[Sqrt[4 Pi ni ElementaryCharge^2 / (IonParams["A"] AtomicMassUnit)]], (*rad/sec, ion plasma frequency*)
+	"Wpi" -> N[Sqrt[4 Pi ni ElementaryCharge^2 / (IonParams["IonType", "A"] AtomicMassUnit)]], (*rad/sec, ion plasma frequency*)
 	
 	     "Vti" -> Vti,                   (*cm/sec, ion thermal velocity*)
 	"LarmorRi" -> N[Sqrt[2] * Vti / Wci] (*cm, ion Larmor radius*)
 |>
-]
+];
 
 
-PlasmaParamsInitialization[PlasmaParams_Association] := Module[ {Wce, Vte, ne},
+PlasmaParamsInitialization[PlasmaParams_Association] := Module[ {Wce, Vte, B, ne},
 
-Wce = ElementaryCharge PlasmaParams["B"] / (ElectronMass * SpeedOfLightC);
+
+  B = PlasmaParams["B"]  * 10^( 4); (*G*)
+Wce = ElementaryCharge B / (ElectronMass * SpeedOfLightC);
 Vte = SpeedOfLightC * Sqrt[BoltzmannK * PlasmaParams["Te"] / ElectronRestEnergy];
  ne = PlasmaParams["ne"] * 10^(-6);
 
@@ -52,8 +55,8 @@ Vte = SpeedOfLightC * Sqrt[BoltzmannK * PlasmaParams["Te"] / ElectronRestEnergy]
 	"Ti" -> BoltzmannK * PlasmaParams["Ti"], (*erg*)
 
 
-	"ne" -> ne,                          (*cm^(-3)*)
-	 "B" -> PlasmaParams["B"] * 10^( 4), (*G*)
+	"ne" -> ne, (*cm^(-3)*)
+	 "B" ->  B, (*G*)
 
   
 	"Wce" -> Wce,                                                   (*rad/sec, electron gyrofrequency*)
@@ -65,23 +68,23 @@ Vte = SpeedOfLightC * Sqrt[BoltzmannK * PlasmaParams["Te"] / ElectronRestEnergy]
 	  "DebyeL" -> N[Sqrt[BoltzmannK * PlasmaParams["Te"] / (4 Pi ElementaryCharge^2 ne)]], (*cm, Debye radius*)
 	  
 	  
-	  "Ions" -> Map[IonInitialization[PlasmaParams, #] &, PlasmaParams["Ions"]] (*the plasma composition*)
+	  "Ions" -> Map[IonInitialization[PlasmaParams, #] &, PlasmaParams["IonsParams"]] (*the plasma composition*)
 	|> 
-]
+];
 
 
 DiagnosticParamsInitialization[DiagnosticParams_Association] := <|
-  "WDiag" -> N[DiagnosticParams["WDiag"] * 2 Pi * 10^(9)], (*rad/sec, the diagnostic frequency*)
+  "WDiag" -> N[DiagnosticParams["FDiag"] * 2 Pi * 10^(9)], (*rad/sec, the diagnostic frequency*)
   
 "alphaIn" -> DiagnosticParams["alphaIn"], (*the angle between the incident wave vector and the local B-field*)
- "ModeIn" -> DiagnosticParams["ModeIn"],  (*the type of the incident mode: ordinary (O) or extraordinary (X) *)
+ "ModeIn" -> DiagnosticParams["ModeIn"],  (*the type of the incident mode: ordinary ("O") or extraordinary ("X") *)
 "alphaSc" -> DiagnosticParams["alphaSc"], (*the angle between the scattered wave vector and the local B-field*)
- "ModeSc" -> DiagnosticParams["ModeSc"],  (*the type of the scattered mode: ordinary (O) or extraordinary (X) *)
+ "ModeSc" -> DiagnosticParams["ModeSc"],  (*the type of the scattered mode: ordinary ("O") or extraordinary ("X") *)
     "phi" -> DiagnosticParams["phi"],     (*the angle between the incident and scattered wave vectors*)
      "Ob" -> DiagnosticParams["Ob"],      (*cm^(-1), beam overlap volume*)
      
-    "Pin" -> DiagnosticParams["Pin"] * 10^(25) / 1.6022 (*eV/sec, the incident power*) 
-|>
+    "PIn" -> DiagnosticParams["PIn"] * 10^(25) / 1.6022 (*eV/sec, the incident power*) 
+|>;
 
 
 End[];
