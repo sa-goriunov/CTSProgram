@@ -73,9 +73,9 @@ Vte = SpeedOfLightC * Sqrt[BoltzmannK * PlasmaParams["Te"] / ElectronRestEnergy]
 DiagnosticParamsInitialization[DiagnosticParams_Association] := <|
   "WDiag" -> N[DiagnosticParams["WDiag"] * 2 Pi * 10^(9)], (*rad/sec, the diagnostic frequency*)
   
-"alphaIn" -> DiagnosticParams["alphaIn"], (*the angle between the incident wave vector and the lockal B-field*)
+"alphaIn" -> DiagnosticParams["alphaIn"], (*the angle between the incident wave vector and the local B-field*)
  "ModeIn" -> DiagnosticParams["ModeIn"],  (*the type of the incident mode: ordinary (O) or extraordinary (X) *)
-"alphaSc" -> DiagnosticParams["alphaSc"], (*the angle between the scattered wave vector and the lockal B-field*)
+"alphaSc" -> DiagnosticParams["alphaSc"], (*the angle between the scattered wave vector and the local B-field*)
  "ModeSc" -> DiagnosticParams["ModeSc"],  (*the type of the scattered mode: ordinary (O) or extraordinary (X) *)
     "phi" -> DiagnosticParams["phi"],     (*the angle between the incident and scattered wave vectors*)
      "Ob" -> DiagnosticParams["Ob"],      (*cm^(-1), beam overlap volume*)
