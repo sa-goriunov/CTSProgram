@@ -5,5 +5,6 @@
 
 Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSConstants.wl"}]];
 Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSIons.wl"}]];
+Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSPlasmaFunctions.wl"}]];
 Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSParamsInitialization.wl"}]];
 Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSWaveVectors.wl"}]];
