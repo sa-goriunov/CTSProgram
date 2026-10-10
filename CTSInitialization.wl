@@ -3,8 +3,10 @@
 (* Copyright 2026 sa-goriunov sa.goriunov@yandex.ru *)
 (* Licensed under Apache 2.0 *)
 
-Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSConstants.wl"}]];
-Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSIons.wl"}]];
+Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSReference", "CTSConstants.wl"}]];
+Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSReference", "CTSIons.wl"}]];
 Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSPlasmaFunctions.wl"}]];
 Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSParamsInitialization.wl"}]];
 Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSWaveVectors.wl"}]];
+Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSGeometricalFormFactor.wl"}]];
+Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSBrightnessTemperature.wl"}]];

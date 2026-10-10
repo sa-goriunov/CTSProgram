@@ -12,7 +12,8 @@ ScatteringWaveVector::usage = "ScatteringWaveVector[DiagnosticParams_Association
 
 Begin["`Private`"];
 
-Needs["CTS`Constants`", "CTS`ParamsInitialisation`"];
+Needs[           "CTS`Constants`"];
+Needs["CTS`ParamsInitialisation`"];
 
 
 PolarizationLambda["O"] =  1; (*     Ordinary wave*)
@@ -27,6 +28,7 @@ v = (PlasmaParams["Wpe"])^2 / W^2;
  gamma = (u Sin[theta]^2)^2 + 4 u (1 - v)^2 Cos[theta]^2;
 lambda = PolarizationLambda[ModeType];
 
+(*Return*)
 Sqrt[1 - (2 v (1 - v)/ (2 (1 - v) - u Sin[theta]^2 + lambda Sqrt[gamma]))]
 ];
 
@@ -46,6 +48,7 @@ dks = Sqrt[ks2 ^ 2 + ks1 ^ 2 - 2 ks2 ks1 Cos[DiagnosticParams["phi"]]];
 dkp = kp2 - kp1;
 
 
+(*Return*)
 <| "k" -> Sqrt[ dks ^ 2 + dkp ^ 2], (*norm of the scattering wave vector*)
   "kp" -> dkp, (*the parallel to the local B-field component*)
   "ks" -> dks  (*the perpendicular to the local B-field component*)

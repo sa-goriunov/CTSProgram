@@ -39,6 +39,7 @@ e2 = ( ve Sqrt[ue] / (1 - ue) ) + Total[ vi Sqrt[ui] / (1 - ui) ];
 e3 =                          ve + Total[ vi ];
 
 
+(*Return*)
 IdentityMatrix[3] - {{e1, -I e2, 0}, {I e2, e1, 0}, {0, 0, e3}}
 ];
 
