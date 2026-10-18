@@ -3,12 +3,15 @@
 (* Copyright 2026 sa-goriunov sa.goriunov@yandex.ru *)
 (* Licensed under Apache 2.0 *)
 
+
 BeginPackage["CTS`BrightnessTemperature`"];
+
 
 CTSBrightnessTemperatureT::usage = "CTSBrightnessTemperatureT[F_List, PlasmaParams_Association, DiagnosticParams_Association, ElectronsFractionsParams_List, IonsFractionsParams_List] is the temperature at which a black body would have to be in order to duplicate the observed received intensity of the plasma PlasmaParams at frequencies F.";
 
 
 Begin["`Private`"];
+
 
 Needs[            "CTS`Constants`"];
 Needs[          "CTS`WaveVectors`"];
@@ -19,13 +22,14 @@ CTSBrightnessTemperatureT[F_List, PlasmaParams_Association, DiagnosticParams_Ass
                                                                                                                                                         LongitudinalDielectricFunctionE},
 
 
-W = 2 Pi F 10^(9); (*rad/sec*)
+W = F * GHztoradpersec; (*rad/sec*)
 K =   ScatteringWaveVector[DiagnosticParams, PlasmaParams];
 G = GeometricalFormFactorG[DiagnosticParams, PlasmaParams];
 
 
 He = Total[ SusceptibilityH[ #["Fraction"], #, PlasmaParams, K, W ] & /@ ElectronsFractionsParams];
 Hi = Total[ SusceptibilityH[ #["Fraction"], #, PlasmaParams, K, W ] & /@      IonsFractionsParams];
+
 
 LongitudinalDielectricFunctionE = 1 + He + Hi;
 

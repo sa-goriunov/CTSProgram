@@ -3,27 +3,32 @@
 (* Copyright 2026 sa-goriunov sa.goriunov@yandex.ru *)
 (* Licensed under Apache 2.0 *)
 
+
 BeginPackage["CTS`ParamsInitialisation`"];
 
-    PlasmaParamsInitialization::usage = "PlasmaParamsInitialization[PlasmaParams_Association] initializes the parametrs of the plasma.";
 
+    PlasmaParamsInitialization::usage = "PlasmaParamsInitialization[PlasmaParams_Association] initializes the parametrs of the plasma.";
 DiagnosticParamsInitialization::usage = 
                             "DiagnosticParamsInitialization[DiagnosticParams_Association] initializes the parametrs of the diagnostic.";
 
 
 Begin["`Private`"];
 
-Needs["CTS`Constants`"];
+
+Needs[        "CTS`Constants`"];
+Needs["CTS`ConversionFactors`"];
 
 
 (*IonInitialization[PlasmaParams_Association, IonParams_Association] initializes the parametrs of the ion.*)
 IonInitialization[PlasmaParams_Association, IonParams_Association] := Module[{Wci, Vti, IonRestEnergy, B, ni},
 
-            B = PlasmaParams["B"]  * 10^( 4); (*G*)
+
+            B = PlasmaParams["B"] * TtoG;
           Wci = IonParams["IonType", "Z"] ElementaryCharge PlasmaParams["B"] / (IonParams["IonType", "A"] * AtomicMassUnit * SpeedOfLightC);
 IonRestEnergy = IonParams["IonType", "A"] * AtomicMassUnit * SpeedOfLightC^2;
           Vti = SpeedOfLightC * Sqrt[BoltzmannK * PlasmaParams["Ti"] / IonRestEnergy];
-           ni = PlasmaParams["ne"] * IonParams["ni/ne"] * 10^(-6); (*cm^(-3)*)
+           ni = PlasmaParams["ne"] * IonParams["ni/ne"] * mtocm^(-3);
+
 
 <|
 	         "Z" -> IonParams["IonType", "Z"],                  (*Nuclear charge number of the ion*)
@@ -43,14 +48,13 @@ IonRestEnergy = IonParams["IonType", "A"] * AtomicMassUnit * SpeedOfLightC^2;
 PlasmaParamsInitialization[PlasmaParams_Association] := Module[ {Wce, Vte, B, ne},
 
 
-  B = PlasmaParams["B"]  * 10^( 4); (*G*)
+  B = PlasmaParams["B"] * TtoG;
 Wce = ElementaryCharge B / (ElectronMass * SpeedOfLightC);
 Vte = SpeedOfLightC * Sqrt[BoltzmannK * PlasmaParams["Te"] / ElectronRestEnergy];
- ne = PlasmaParams["ne"] * 10^(-6);
+ ne = PlasmaParams["ne"] * mtocm^(-3);
 
-	<|
 
- 
+<|
 	"Te" -> BoltzmannK * PlasmaParams["Te"], (*erg*)
 	"Ti" -> BoltzmannK * PlasmaParams["Ti"], (*erg*)
 
@@ -69,12 +73,12 @@ Vte = SpeedOfLightC * Sqrt[BoltzmannK * PlasmaParams["Te"] / ElectronRestEnergy]
 	  
 	  
 	  "Ions" -> Map[IonInitialization[PlasmaParams, #] &, PlasmaParams["IonsParams"]] (*the plasma composition*)
-	|> 
+|> 
 ];
 
 
 DiagnosticParamsInitialization[DiagnosticParams_Association] := <|
-  "WDiag" -> N[DiagnosticParams["FDiag"] * 2 Pi * 10^(9)], (*rad/sec, the diagnostic frequency*)
+  "WDiag" -> N[DiagnosticParams["FDiag"] * GHztoradpersec], (*rad/sec, the diagnostic frequency*)
   
 "alphaIn" -> DiagnosticParams["alphaIn"], (*the angle between the incident wave vector and the local B-field*)
  "ModeIn" -> DiagnosticParams["ModeIn"],  (*the type of the incident mode: ordinary ("O") or extraordinary ("X") *)
@@ -83,10 +87,11 @@ DiagnosticParamsInitialization[DiagnosticParams_Association] := <|
     "phi" -> DiagnosticParams["phi"],     (*the angle between the incident and scattered wave vectors*)
      "Ob" -> DiagnosticParams["Ob"],      (*cm^(-1), beam overlap volume*)
      
-    "PIn" -> DiagnosticParams["PIn"] * 10^(25) / 1.6022 (*eV/sec, the incident power*) 
+    "PIn" -> DiagnosticParams["PIn"] * MJtoeV (*eV/sec, the incident power*)
 |>;
 
 
 End[];
+
 
 EndPackage[];
