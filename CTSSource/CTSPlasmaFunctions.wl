@@ -10,9 +10,6 @@ BeginPackage["CTS`PlasmaFunctions`"];
 PlasmaDispersionFunctionZ::usage = "PlasmaDispersionFunctionZ[x] calculates the plasma dispersion function with real argument x.";
 
 
-ColdPlasmaDielectricTensorE::usage = "ColdPlasmaDielectricTensorE[PlasmaParams_Association, W] calculates the dielectric tensor for cold plasma PlasmaParams for wave with frequency W. Axe Z is parallel with the local B-field.";
-
-
 Begin["`Private`"];
 
 
