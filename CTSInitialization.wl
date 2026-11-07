@@ -10,4 +10,9 @@ Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSPlasmaFunctions.wl"}]];
 Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSParamsInitialization.wl"}]];
 Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSWaveVectors.wl"}]];
 Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSGeometricalFormFactor.wl"}]];
+
+
+Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSFractions", "Electrons", "Thermal.wl"}]];
+
+
 Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSBrightnessTemperature.wl"}]];

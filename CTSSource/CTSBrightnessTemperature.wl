@@ -23,19 +23,19 @@ CTSBrightnessTemperatureT[F_List, PlasmaParams_Association, DiagnosticParams_Ass
 
 
 W = F * GHztoradpersec; (*rad/sec*)
-K =   ScatteringWaveVector[DiagnosticParams, PlasmaParams];
-G = GeometricalFormFactorG[DiagnosticParams, PlasmaParams];
+K = ScatteringWaveVector[DiagnosticParams, PlasmaParams];
+G = GeometricalFormFactorG[W, DiagnosticParams, PlasmaParams];
 
 
-He = Total[ SusceptibilityH[ #["Fraction"], #, PlasmaParams, K, W ] & /@ ElectronsFractionsParams];
-Hi = Total[ SusceptibilityH[ #["Fraction"], #, PlasmaParams, K, W ] & /@      IonsFractionsParams];
+He = Total[ #["SusceptibilityH"][ #, PlasmaParams, K, W ] & /@ ElectronsFractionsParams ];
+Hi = Total[ #["SusceptibilityH"][ #, PlasmaParams, K, W ] & /@      IonsFractionsParams ];
 
 
 LongitudinalDielectricFunctionE = 1 + He + Hi;
 
 
-Se0 = Total[ SpectralDensityS0[ #["Fraction"], #, PlasmaParams, K, W ] & /@ ElectronsFractionsParams];
-Si0 = Total[ SpectralDensityS0[ #["Fraction"], #, PlasmaParams, K, W ] & /@      IonsFractionsParams];
+Se0 = Total[ #["SpectralDensityS0"][ #, PlasmaParams, K, W ] & /@ ElectronsFractionsParams ];
+Si0 = Total[ #["SpectralDensityS0"][ #, PlasmaParams, K, W ] & /@      IonsFractionsParams ];
 
 
 (*Return*) 
@@ -43,6 +43,8 @@ ClassicalRe^2 (2 Pi SpeedOfLightC / DiagnosticParams["WDiag"])^2 PlasmaParams["n
 ( (Abs[1 - He/LongitudinalDielectricFunctionE])^2 Se0 + (Abs[He/LongitudinalDielectricFunctionE])^2 Si0 )
 ];
 
+
 End[];
+
 
 EndPackage[];
