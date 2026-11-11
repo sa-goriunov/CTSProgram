@@ -6,9 +6,9 @@
 Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSReference", "CTSConstants.wl"}]];
 Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSReference", "CTSConversionFactors.wl"}]];
 Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSReference", "CTSIons.wl"}]];
-Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSPlasmaFunctions.wl"}]];
+Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSPlasmaDispersionFunction.wl"}]];
 Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSParamsInitialization.wl"}]];
-Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSWaveVectors.wl"}]];
+Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSWaveVector.wl"}]];
 Get[FileNameJoin[{NotebookDirectory[], "CTSSource", "CTSGeometricalFormFactor.wl"}]];
 
 
