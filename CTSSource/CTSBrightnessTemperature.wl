@@ -14,17 +14,19 @@ Begin["`Private`"];
 
 
 Needs[            "CTS`Constants`"];
+Needs[    "CTS`ConversionFactors`"];
 Needs[           "CTS`WaveVector`"];
 Needs["CTS`GeometricalFormFactor`"];
 
 
-CTSBrightnessTemperatureT[F_List, PlasmaParams_Association, DiagnosticParams_Association, ElectronsFractions_List, IonsFractions_List, delta_] := Module[{W, K, G, He, Hi, Se0, Si0,
+CTSBrightnessTemperatureT[F_List, PlasmaParams_Association, DiagnosticParams_Association, ElectronsFractionsParams_List, IonsFractionsParams_List, delta_] := Module[{w, W, K, G, He, Hi, Se0, Si0,
                                                                                                                                                                  LongitudinalDielectricFunctionE},
 
 
-W = F * GHztoradpersec; (*rad/sec*)
+w = F * GHztoradpersec; (*rad/sec*)
+W = w - DiagnosticParams["WDiag"]; (*rad/sec*)
 K = ScatteringWaveVector[DiagnosticParams, PlasmaParams];
-G = GeometricalFormFactorG[W, DiagnosticParams, PlasmaParams];
+G = GeometricalFormFactorG[w, DiagnosticParams, PlasmaParams];
 
 
 He = Total[ #["SusceptibilityH"][ #, PlasmaParams, K, W, delta ] & /@ ElectronsFractionsParams ];
