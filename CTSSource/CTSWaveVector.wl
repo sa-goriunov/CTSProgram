@@ -4,7 +4,7 @@
 (* Licensed under Apache 2.0 *)
 
 
-BeginPackage["CTS`WaveVectors`"];
+BeginPackage["CTS`WaveVector`"];
 
 
     PolarizationLambda::usage = "PolarizationLambda[ModeType] is a coefficient in the formulae for different polarizations.";
@@ -37,7 +37,7 @@ lambda = PolarizationLambda[ModeType];
 
 
 (*Return*)
-Sqrt[1 - (2 v (1 - v)/ (2 (1 - v) - u Sin[theta]^2 + lambda Sqrt[gamma]))]
+Sqrt[1 - (2 v (1 - v)/ (2 (1 - v) - u Sin[theta]^2 + lambda Sqrt[gamma]))] (* Appleton-Hartree equation *)
 ];
 
 

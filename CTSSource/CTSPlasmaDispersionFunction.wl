@@ -4,7 +4,7 @@
 (* Licensed under Apache 2.0 *)
 
 
-BeginPackage["CTS`PlasmaFunctions`"];
+BeginPackage["CTS`PlasmaDispersionFunction`"];
 
 
 PlasmaDispersionFunctionZ::usage = "PlasmaDispersionFunctionZ[x] calculates the plasma dispersion function with real argument x.";

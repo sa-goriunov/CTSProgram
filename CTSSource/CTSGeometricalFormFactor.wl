@@ -13,7 +13,7 @@ GeometricalFormFactorG::usage = "GeometricalFormFactorG[W_List, DiagnosticParams
 Begin["`Private`"];
 
 
-Needs["CTS`WaveVectors`"];
+Needs["CTS`WaveVector`"];
 
 
 GeometricalFormFactorG[W_List, DiagnosticParams_Association, PlasmaParams_Association] := Module[{ uIn, vIn, uSc, vSc,
@@ -52,9 +52,9 @@ ESc = Table[ {{epsilon1Sc[[i]], I epsilon2Sc[[i]], 0}, {- I epsilon2Sc[[i]], eps
 
 
 (*e is the un-normalized polarization vector for an electromagnetic wave with frequency W and polarization ModeType, propagating in a uniform magnetized plasma PlasmaParams with angle alpha to the local B-field*)
-eIn = { 1, I epsilon2In / (epsilon1In - nIn^2), nIn^2 Sin[DiagnosticParams["alphaIn"]] Cos[DiagnosticParams["alphaIn"]] / (nIn^2 Sin[DiagnosticParams["alphaIn"]]^2 - epsilon3In)};
+eIn = { 1, I epsilon2In / (epsilon1In - nIn^2), nIn^2 Sin[2 DiagnosticParams["alphaIn"]] / ( 2 (nIn^2 Sin[DiagnosticParams["alphaIn"]]^2 - epsilon3In) ) };
 eSc = Table[ RotationMatrix[DiagnosticParams["phi"], {0, 0, 1}] .
-{ 1, I epsilon2Sc[[i]] / (epsilon1Sc[[i]] - nSc[[i]]^2), nSc[[i]]^2 Sin[DiagnosticParams["alphaSc"]] Cos[DiagnosticParams["alphaSc"]] / (nSc[[i]]^2 Sin[DiagnosticParams["alphaSc"]]^2 - epsilon3Sc[[i]])}, {i, 1, Length[W]} ];
+{ 1, I epsilon2Sc[[i]] / (epsilon1Sc[[i]] - nSc[[i]]^2), nSc[[i]]^2 Sin[2 DiagnosticParams["alphaSc"]] / ( 2 (nSc[[i]]^2 Sin[DiagnosticParams["alphaSc"]]^2 - epsilon3Sc[[i]]) ) }, {i, 1, Length[W]} ];
 
 
 gammaIn = (uIn Sin[DiagnosticParams["alphaIn"]]^2)^2 + 4 uIn (1 - vIn)^2 Cos[DiagnosticParams["alphaIn"]]^2;
@@ -62,8 +62,8 @@ gammaSc = (uSc Sin[DiagnosticParams["alphaSc"]]^2)^2 + 4 uSc (1 - vSc)^2 Cos[Dia
 
 
 (*The angles between the direction of the wave vector and that of the ray*)
-deltaIn = ArcTan[ - PolarizationLambda[DiagnosticParams["ModeIn"]] (1 - nIn^2) uIn Cos[DiagnosticParams["alphaIn"]] Sin[DiagnosticParams["alphaIn"]] / Sqrt[gammaIn]];
-deltaSc = ArcTan[ - PolarizationLambda[DiagnosticParams["ModeSc"]] (1 - nSc^2) uSc Cos[DiagnosticParams["alphaSc"]] Sin[DiagnosticParams["alphaSc"]] / Sqrt[gammaSc]];
+deltaIn = ArcTan[ - PolarizationLambda[DiagnosticParams["ModeIn"]] (1 - nIn^2) uIn Sin[2 DiagnosticParams["alphaIn"]] / (2 Sqrt[gammaIn]) ];
+deltaSc = ArcTan[ - PolarizationLambda[DiagnosticParams["ModeSc"]] (1 - nSc^2) uSc Sin[2 DiagnosticParams["alphaSc"]] / (2 Sqrt[gammaSc]) ];
 
 
 (*Return*)

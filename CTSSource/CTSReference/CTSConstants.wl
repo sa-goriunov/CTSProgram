@@ -7,12 +7,12 @@
 BeginPackage["CTS`Constants`"];
 
 
-        BoltzmannK::usage =                 "BoltzmannK is Boltzmann constant, erg/keV.";
-  ElementaryCharge::usage =         "ElementaryCharge is the charge of an electron, Fr.";
-      ElectronMass::usage =                          "ElectronMass is electron mass, g.";
-     SpeedOfLightC::usage =     "SpeedOfLightC is the speed of light in vacuum, cm/sec.";
-ElectronRestEnergy::usage = "ElectronRestEnergy is the rest energy of an electron, erg.";
-       ClassicalRe::usage =          "ClassicalRe is the classical electron radius, cm.";
+             BoltzmannK::usage =                 "BoltzmannK is Boltzmann constant, erg/keV.";
+       ElementaryCharge::usage =         "ElementaryCharge is the charge of an electron, Fr.";
+           ElectronMass::usage =                          "ElectronMass is electron mass, g.";
+          SpeedOfLightC::usage =     "SpeedOfLightC is the speed of light in vacuum, cm/sec.";
+     ElectronRestEnergy::usage = "ElectronRestEnergy is the rest energy of an electron, erg.";
+ClassicalElectronRadius::usage =          "ClassicalRe is the classical electron radius, cm.";
 
 
 Begin["`Private`"];
@@ -30,7 +30,7 @@ ElementaryCharge = 4.8032 * 10^(-10); (*Fr*)
 ElectronRestEnergy = ElectronMass * SpeedOfLightC^2; (*erg*)
 
 
-ClassicalRe = ElementaryCharge^2 / ElectronRestEnergy; (*cm*)
+ClassicalElectronRadius = ElementaryCharge^2 / ElectronRestEnergy; (*cm*)
 
 
 End[];

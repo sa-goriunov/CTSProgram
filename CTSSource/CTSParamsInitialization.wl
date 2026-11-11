@@ -19,6 +19,9 @@ Needs[        "CTS`Constants`"];
 Needs["CTS`ConversionFactors`"];
 
 
+(*TODO: rename variables and add more comments*)
+
+
 (*IonInitialization[PlasmaParams_Association, IonParams_Association] initializes the parametrs of the ion.*)
 IonInitialization[PlasmaParams_Association, IonParams_Association] := Module[{Wci, Vti, IonRestEnergy, B, ni},
 
@@ -55,11 +58,11 @@ Vte = SpeedOfLightC * Sqrt[BoltzmannK * PlasmaParams["Te"] / ElectronRestEnergy]
 
 
 <|
-	"Te" -> BoltzmannK * PlasmaParams["Te"], (*erg*)
-	"Ti" -> BoltzmannK * PlasmaParams["Ti"], (*erg*)
+	"Te" -> BoltzmannK * PlasmaParams["Te"], (*erg, the electron temperature*)
+	"Ti" -> BoltzmannK * PlasmaParams["Ti"], (*erg, the ion temperature*)
 
 
-	"ne" -> ne, (*cm^(-3)*)
+	"ne" -> ne, (*cm^(-3), the electron concetration*)
 	 "B" ->  B, (*G*)
 
   
