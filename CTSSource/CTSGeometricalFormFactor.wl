@@ -43,7 +43,7 @@ epsilon3Sc =                  1 - vSc ;
 
 (*Refractive indexes*)
 nIn = PlasmaRefractiveIndexN[DiagnosticParams["WDiag"], DiagnosticParams["alphaIn"], DiagnosticParams["ModeIn"], PlasmaParams];
-nSc = PlasmaRefractiveIndexN[#, DiagnosticParams["alphaSc"], DiagnosticParams["ModeSc"], PlasmaParams] & /@ W;
+nSc = PlasmaRefractiveIndexN[W, DiagnosticParams["alphaSc"], DiagnosticParams["ModeSc"], PlasmaParams];
 
 
 (*E is the dielectric tensor for cold plasma PlasmaParams for wave with frequency W. Axe Z is parallel with the local B-field*)
