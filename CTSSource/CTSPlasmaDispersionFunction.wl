@@ -13,11 +13,7 @@ PlasmaDispersionFunctionZ::usage = "PlasmaDispersionFunctionZ[x] calculates the 
 Begin["`Private`"];
 
 
-PlasmaDispersionFunctionZ[x_] := If[ Abs[x] <= 25, 
-                                     Sqrt[Pi] (I - Erfi[x]) Exp[- x^2], 
-                                 (*else*) 
-                                     I Sqrt[Pi] Exp[- x^2] - 1 / x - 1 / (2 x^3)
-                                 ];
+PlasmaDispersionFunctionZ[x_] := I Sqrt[Pi] Exp[- x^2] - 2 DawsonF[x];
 
 
 End[];

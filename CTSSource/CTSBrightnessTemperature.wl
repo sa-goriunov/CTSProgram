@@ -16,11 +16,22 @@ Begin["`Private`"];
 Needs[            "CTS`Constants`"];
 Needs[    "CTS`ConversionFactors`"];
 Needs[           "CTS`WaveVector`"];
+Needs[ "CTS`ParamsInitialisation`"];
 Needs["CTS`GeometricalFormFactor`"];
 
 
-CTSBrightnessTemperatureT[F_List, PlasmaParams_Association, DiagnosticParams_Association, ElectronsFractionsParams_List, IonsFractionsParams_List, delta_] := Module[{w, W, K, G, He, Hi, Se0, Si0,
-                                                                                                                                                                 LongitudinalDielectricFunctionE},
+CTSBrightnessTemperatureT[F_List, PlasmaParamsInit_Association, DiagnosticParamsInit_Association, ElectronsFractions_List, IonsFractions_List, delta_] := Module[{w, W, K, G, He, Hi, Se0, Si0,
+                                                                                                                                                                LongitudinalDielectricFunctionE,
+                                                                                                                                                                 PlasmaParams, DiagnosticParams,
+                                                                                                                                                  ElectronsFractionsParams, IonsFractionsParams},
+
+
+    PlasmaParams =     PlasmaParamsInitialization[    PlasmaParamsInit];
+DiagnosticParams = DiagnosticParamsInitialization[DiagnosticParamsInit];
+
+
+ElectronsFractionsParams = #["Initialization"][PlasmaParams, DiagnosticParams, #["Data"]] & /@ ElectronsFractions;
+     IonsFractionsParams = #["Initialization"][PlasmaParams, DiagnosticParams, #["Data"]] & /@      IonsFractions;
 
 
 w = F * GHztoradpersec; (*rad/sec*)

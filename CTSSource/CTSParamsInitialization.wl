@@ -27,7 +27,7 @@ IonInitialization[PlasmaParams_Association, IonParams_Association] := Module[{Wc
 
 
             B = PlasmaParams["B"] * TtoG;
-          Wci = IonParams["IonType", "Z"] ElementaryCharge PlasmaParams["B"] / (IonParams["IonType", "A"] * AtomicMassUnit * SpeedOfLightC);
+          Wci = IonParams["IonType", "Z"] ElementaryCharge B / (IonParams["IonType", "A"] * AtomicMassUnit * SpeedOfLightC);
 IonRestEnergy = IonParams["IonType", "A"] * AtomicMassUnit * SpeedOfLightC^2;
           Vti = SpeedOfLightC * Sqrt[BoltzmannK * PlasmaParams["Ti"] / IonRestEnergy];
            ni = PlasmaParams["ne"] * IonParams["ni/ne"] * mtocm^(-3);
