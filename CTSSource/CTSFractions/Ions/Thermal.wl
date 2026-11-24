@@ -62,7 +62,7 @@ Y = Table[ ThermalCalculationsY[W, PlasmaParams["Ions"][[i]]["Wci"], PlasmaParam
 SalpeterAlpha = 1 / (K["k"] PlasmaParams["DebyeL"]);
 
 SalpeterAlpha^2 Sum[PlasmaParams["Ions"][[i]]["Z"]^2 PlasmaParams["Ions"][[i]]["ni/ne"](PlasmaParams["Te"]/PlasmaParams["Ti"])
-                    (1 + ( W / (Sqrt[2] PlasmaParams["Ions"][[i]]["Vti"] Abs[K["kp"]]) ) * ( ThermalCalculationsS0Z[ Y[[i]], R[[i]], L[[i]]] + PlasmaDispersionFunctionZ[Y[[i, L[[i]] + 1]]] ) / ( 1 + 2 b0[[i]] ) ), { i, Length[PlasmaParams["Ions"]]}]
+                    (1 + ( W / (Sqrt[2] PlasmaParams["Ions"][[i]]["Vti"] K["kp"]) ) * ( ThermalCalculationsS0Z[ Y[[i]], R[[i]], L[[i]]] + PlasmaDispersionFunctionZ[Y[[i, L[[i]] + 1]]] ) / ( 1 + 2 b0[[i]] ) ), { i, Length[PlasmaParams["Ions"]]}]
 
 ];
 

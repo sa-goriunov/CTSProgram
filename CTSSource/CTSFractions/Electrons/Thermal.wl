@@ -51,7 +51,10 @@ Y = ThermalCalculationsY[W, PlasmaParams["Wce"], PlasmaParams["Vte"], K["kp"], L
 
 SalpeterAlpha = 1 / (K["k"] PlasmaParams["DebyeL"]);
 
-SalpeterAlpha^2 (1 + ( W / (Sqrt[2] PlasmaParams["Vte"] Abs[K["kp"]]) ) * ( ThermalCalculationsS0Z[ Y, R, L] + PlasmaDispersionFunctionZ[Y[[L + 1]]] ) / ( 1 + 2 b0 ) )
+
+SalpeterAlpha^2 (
+   1 + ( W / (Sqrt[2] PlasmaParams["Vte"] K["kp"]) ) * (( ThermalCalculationsS0Z[ Y, R, L] + PlasmaDispersionFunctionZ[Y[[L + 1]]] ) / ( 1 + 2 b0 ))
+)
 
 ];
 
